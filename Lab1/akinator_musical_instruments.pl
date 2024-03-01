@@ -119,6 +119,14 @@ question(pedals) :-
 question(collection) :-
     query('Is this a collection of instruments?').
 
+instrument(tuba) :-
+    question(brass),
+    question(jazz),
+    question(large),
+    question(curved),
+    question(bass_clef),
+    question(single_reed).
+
 instrument(cello) :-
     question(string),
     question(bow),
@@ -236,14 +244,6 @@ instrument(saxophone) :-
     question(curved),
     question(single_reed).
 
-instrument(tuba) :-
-    question(brass),
-    question(jazz),
-    question(large),
-    question(curved),
-    question(bass_clef),
-    question(single_reed).
-
 instrument(flute) :-
     question(woodwind),
     question(multiple_reeds).
@@ -288,10 +288,17 @@ instrument(harp) :-
     question(large),
     question(triangular).
 
+check_if_categorical(Prompt, Reply) :- ((Prompt == string, Reply==y) -> (asked(brass, n), asked(percussion, n), asked(woodwind, n))),
+((Prompt==brass, Reply==y) -> (asked(string, n), asked(percussion, n), asked(woodwind, n))),
+((Prompt == percussion, Reply==y) -> (asked(string, n), asked(brass, n), asked(woodwind, n))),
+((Prompt==african_origin, Reply==y) -> (asked(hawaii_origin, n), asked(greek, n))),
+((Prompt==hawaii_origin, Reply==y) -> (asked(greek, n)));true.
+
 query(Prompt) :-
     (   asked(Prompt, Reply) -> true
     ;   nl, write(Prompt), write(' (y/n)? '),
         read(X),(X = y -> Reply = y ; Reply = n),
+        check_if_categorical(Prompt, Reply),
 	assert(asked(Prompt, Reply))
     ),
     Reply = y.
