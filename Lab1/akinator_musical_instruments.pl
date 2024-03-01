@@ -11,56 +11,113 @@ main :-
 question(string) :-
     query('Is this a string instrument?').
 
-question(boot_failure) :-
-    query('Does the computer show boot failure').
+question(bow) :-
+    query('Do musicians generally use a bow to play this instrument?').
 
-question(bad_sector) :-
-    query('Does the computer show bad sector error').
+question(bass_clef) :-
+    query('Is the music for this instrument generally written in the bass clef?').
 
-question(cannot_read) :-
-    query('Does the computer show cannot read from specified device').
+question(small) :-
+    query('Is it a small instrument?').
 
-question(long_beep) :-
-    query('Is there a long beep during bootup').
+question(soprano) :-
+    query('Is it a soprano instrument?').
 
-question(short_beep) :-
-    query('Is there a short beep during bootup').
+question(pluck) :-
+    query('Is this instrument plucked?').
 
-question(two_long_beeps) :-
-    query('Are there two long beeps during bootup').
+question(african_origin) :-
+    query('Does this instrument originate from Africa?').
 
-question(two_short_beeps) :-
-    query('Are there two short beeps during bootup').
+question(hawaii_origin) :-
+    query('Does this instrument originate from Hawaii?').
 
-question(blank_display) :-
-    query('Is there a blank display during bootup').
+question(pick) :-
+    query('Can you produce sound using a pick with this instrument?').
 
-question(repeating_short_beeps) :-
-    query('Are there repeating short beeps during bootup').
+question(acoustic) :-
+    query('Is this an acoustic instrument').
 
-question(continuous_beeps) :-
-    query('Is there a continuous beep during bootup').
+question(electric) :-
+    query('Is this an electric instrument?').
 
-question(no_beep) :-
-    query('Is there a beep during bootup').
+question(low_pitch) :-
+    query('Is it a low-pitched instrument?').
 
-question(not_printing) :-
-    query('Is there a question with printing').
+question(middle_ages) :-
+    query('Was this instrument invented during Middle Ages?').
 
-question(missing_dots) :-
-    query('Is there a missing character during printing').
+question(greek) :-
+    query('Is this a Greek instrument?').
 
-question(non_uniform_printing) :-
-    query('Is there uniform printing').
+question(tenor_violin) :-
+    query('Is this a tenor instrument?').
 
-question(spread_ink) :-
-    query('Is there spreading of ink during printing').
+question(large) :-
+    query('Is this a large instrument?').
 
-question(paper_jam) :-
-    query('Is there a paper jam during printing').
+question(woodwind) :-
+    query('Is is a woodwind instrument?').
 
-question(out_of_paper) :-
-    query('Is there out-of- paper error during printing').
+question(bag) :-
+    query('Is this instrument placed in a bag?').
+
+question(woodwind) :-
+    query('Is is a woodwind instrument?').
+
+question(brass) :-
+    query('Is this a brass instrument?').
+
+question(jazz) :-
+    query('Is this instrument used in jazz music?').
+
+question(curved) :-
+    query('Is this a curved instrument?').
+
+question(russian_origin) :-
+    query('Does this instrument originate from russia').
+
+question(folk) :-
+    query('Is this instrument used to play folk music?').
+
+question(triangular) :-
+    query('Does this instrument have a triangular shape?').
+
+question(single_reed) :-
+    query('Does this instrument have a single reed?').
+
+question(tubular) :-
+    query('Does this instrument have a tubular shape?').
+
+question(percussion) :-
+    query('Is this a percussion instrument?').
+
+question(cows) :-
+    query('Is this instrument related to cows?').
+
+question(keyboard) :-
+    query('Does this instrument have a keyboard?').
+
+question(mallets) :-
+    query('Is this instrument played using mallets?').
+
+question(round) :-
+    query('Does this instrument have a round shape?').
+
+question(drumsticks) :-
+    query('Is this instrument played using drumsticks?').
+
+question(high_pitch) :-
+    query('Is this instrument high-pitched?').
+
+question(jingles) :-
+    query('Does this instrument have jingles?').
+
+question(pedals) :-
+    query('Does this instrument have pedals?').
+
+question(collection) :-
+    query('Is this a collection of instruments?').
 
 instrument(cello) :-
     question(string),
