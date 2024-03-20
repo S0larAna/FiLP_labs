@@ -1,3 +1,5 @@
+%consult("C:\\Users\\bodya\\уник\\prolog\\FiLP_labs\\Lab1\\1.pl").
+
 main :-
     retractall(asked(_,_)),
     instrument(Question),
