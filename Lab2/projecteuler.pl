@@ -1,7 +1,7 @@
 :- dynamic(abundant/1).
 :- dynamic(sum/1).
 
-% Предикат для нахождения делителей числа и сохранения их в динамической памяти
+% нахождение суммы делителей числа
 find_div_sum(N, Sum) :- find_div_sum(N, 0, 1, Sum).
 find_div_sum(N, Sum, N, Sum).
 find_div_sum(N, CurSum, K, Sum) :-
@@ -9,7 +9,7 @@ find_div_sum(N, CurSum, K, Sum) :-
     NextK is K + 1,
     find_div_sum(N, NextSum, NextK, Sum).
 
-% Предикат для проверки, является ли число избыточным
+% проверка, является ли число избыточным
 is_abundant(N) :-
     find_div_sum(N, Sum),
     (   Sum > N
@@ -18,7 +18,7 @@ is_abundant(N) :-
     ).
 
 
-% Предикат для генерации избыточных чисел до Max и сохранения их в динамической памяти
+% генерация избыточных чисел до Max и сохранение их в динамической памяти
 generate_abundant_numbers(Max) :-
     between(1, Max, N),
     write(N), nl,
@@ -27,7 +27,7 @@ generate_abundant_numbers(Max) :-
     fail.
 generate_abundant_numbers(_).
 
-% Предикат для генерации уникальных сумм из пар избыточных чисел и сохранения их в динамической памяти
+% генерация уникальных сумм из пар избыточных чисел и сохранения их в динамической памяти
 generate_unique_sums(Max) :-
     abundant(A),
     abundant(B),
@@ -39,7 +39,7 @@ generate_unique_sums(Max) :-
     fail.
 generate_unique_sums(_).
 
-% Предикат для подсчета количества чисел, которые нельзя представить в виде суммы двух чисел с избытком
+% предикат для подсчета количества чисел, которые нельзя представить в виде суммы двух чисел с избытком
 count_non_sum_of_two_abundant(Max, Count) :-
     generate_abundant_numbers(Max),
     generate_unique_sums(Max),
@@ -47,7 +47,7 @@ count_non_sum_of_two_abundant(Max, Count) :-
     retractall(abundant(_)),
     retractall(sum(_)).
 
-% Рекурсивный предикат для подсчета количества чисел, которые нельзя представить в виде суммы двух избыточных чисел
+% предикат для подсчета количества чисел, которые нельзя представить в виде суммы двух избыточных чисел
 count_non_sum(N, N, Count, Count) :- !.
 count_non_sum(N, Max, AccCount, Count) :-
     (   sum(N)
@@ -59,7 +59,7 @@ count_non_sum(N, Max, AccCount, Count) :-
         count_non_sum(NextN, Max, NextAccCount, Count)
     ).
 
-% Главный предикат для решения задачи
+% решение
 solve(Count) :-
     Max = 28123,
     count_non_sum_of_two_abundant(Max, Count).
