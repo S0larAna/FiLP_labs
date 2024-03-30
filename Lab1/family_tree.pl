@@ -52,8 +52,10 @@ men():- man(X), print(X), nl, fail.
 women():- woman(X), print(X), nl, fail.
 children(X):- parent(X,Y), print(Y), nl, fail.
 
-% Predicate mother(+X: atom, +Y: atom)
-% Построить предикат mother(X, Y), который проверяет, является ли X матерью Y.
+% Predicate mother(?X: atom, +Y: atom)
+% Построить предикат mother(X, Y), который проверяет, является ли X матерью Y, если X и Y унифицированы
+% если X не унифицирована, выводит мать Y
+% если Y не унифицирована, выводит ребенка X
 mother(X,Y):- woman(X), parent(X,Y).
 
 % Predicate mother(+X: atom)
@@ -78,7 +80,7 @@ b_s(X,Y):- parent(Z,X), parent(Z,Y), ((man(X), woman(Y));(man(Y), woman(X))), pr
 % Predicate b_s(+X:atom)
 % Построить предикат b_s(X), который выводит
   %всех братьев или сестер X.
-b_s(X):- parent(Z,X), parent(Z,Y), woman(Z), X\==Y, print(Y), nl, fail.
+b_s(X):- b_a(X, Y), print(Y), nl, fail.
 
 % задание 2.
 % Predicate son(+X:atom, +Y:atom)
