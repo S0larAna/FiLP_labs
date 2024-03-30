@@ -68,7 +68,7 @@ brothers(X,Y):- parent(Z,X), parent(Z,Y), man(X), man(Y).
 
 % Predicate brothers(+X:atom)
 % Построить предикат brothers(X), который выводит всех братьев X.
-brothers(X):- parent(Z,X), parent(Z,Y), man(Y), woman(Z), X\==Y, print(Y), nl, fail.
+brothers(X):- brothers(X, Y), X\==Y, print(Y), nl, fail.
 
 % Predicate b_s(+X:atom, +Y:atom)
 % Построить предикат b_s(X,Y), который проверяет, являются ли X и Y родными
@@ -80,7 +80,7 @@ b_s(X,Y):- parent(Z,X), parent(Z,Y), ((man(X), woman(Y));(man(Y), woman(X))), pr
 % Predicate b_s(+X:atom)
 % Построить предикат b_s(X), который выводит
   %всех братьев или сестер X.
-b_s(X):- b_a(X, Y), print(Y), nl, fail.
+b_s(X):- b_s(X, Y), print(Y), nl, fail.
 
 % задание 2.
 % Predicate son(+X:atom, +Y:atom)
