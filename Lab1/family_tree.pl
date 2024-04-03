@@ -62,7 +62,7 @@ mother(X,Y):- woman(X), parent(X,Y).
 % Построить предикат, mother(X), который выводит маму X.
 mother(X):- mother(Y,X), print(Y), nl.
 
-% Predicate brothers(+X:atom, +Y:atom)
+% Predicate brothers(+X:atom, ?Y:atom)
 % Построить предикат brother(X, Y), который проверяет, является ли X братом Y.
 brothers(X,Y):- parent(Z,X), parent(Z,Y), man(X), man(Y).
 
@@ -70,7 +70,7 @@ brothers(X,Y):- parent(Z,X), parent(Z,Y), man(X), man(Y).
 % Построить предикат brothers(X), который выводит всех братьев X.
 brothers(X):- brothers(X, Y), X\==Y, print(Y), nl, fail.
 
-% Predicate b_s(+X:atom, +Y:atom)
+% Predicate b_s(+X:atom, ?Y:atom)
 % Построить предикат b_s(X,Y), который проверяет, являются ли X и Y родными
   %братом и сестрой или братьями или сестрами.
 b_s(X,Y):- parent(Z,X), parent(Z,Y), woman(X), woman(Y), print(sisters).
@@ -83,7 +83,7 @@ b_s(X,Y):- parent(Z,X), parent(Z,Y), ((man(X), woman(Y));(man(Y), woman(X))), pr
 b_s(X):- b_s(X, Y), print(Y), nl, fail.
 
 % задание 2.
-% Predicate son(+X:atom, +Y:atom)
+% Predicate son(+X:atom, ?Y:atom)
 % Построить предикат son(X, Y), который проверяет, является ли X сыном Y.
 son(X,Y):- parent(Y,X), man(X).
 
@@ -91,7 +91,7 @@ son(X,Y):- parent(Y,X), man(X).
 % Построить предикат, son(X), который выводит сына X.
 son(X):- son(Y, X), print(Y), nl, fail.
 
-% Predicate sisters(+X:atom, +Y:atom)
+% Predicate sisters(?X:atom, +Y:atom)
 % Построить предикат sister(X, Y), который проверяет, является ли X сестрой Y.
 sister(X,Y):- woman(X), parent(Z,X), parent(Z,Y), woman(Z), X\==Y.
 
@@ -103,7 +103,7 @@ sisters(X):- sister(Y, X), print(Y), nl, fail.
 % задание 3.
 % версия с использованием только базы фактов
 
-% Predicate grand_ma(+X:atom,+Y:atom)
+% Predicate grand_ma(?X:atom,+Y:atom)
 % Построить предикат grand_ma(X, Y), который проверяет, является ли X бабушкой Y.
 grand_ma(X,Y):- woman(X), parent(X,Z), parent(Z,Y).
 
@@ -118,7 +118,7 @@ grand_pa_and_son(X,Y):- man(X), man(Y),(parent(X,Z), parent(Z,Y));(parent(Y,Z), 
 
 % Построить предикат, который проверяет, является ли X дядей Y. Построить
   %предикат, который выводит всех дядей X.
-  % Predicate uncle(+X:atom,+Y:atom)
+  % Predicate uncle(?X:atom,+Y:atom)
 uncle(X, Y):- man(X), parent(Z,Y), parent(A,Z), parent(A,X), woman(A).
 % Predicate uncle(+X:atom)
 uncles(X):- uncle(Y,X), print(Y), nl, fail.
