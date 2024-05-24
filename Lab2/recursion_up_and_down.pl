@@ -35,6 +35,13 @@ free_of_squares(N, X) :- N *N =< X,(
                           free_of_squares(N1, X)
 ).
 
+find_div_sum(N, Sum) :- find_div_sum(N, 0, 1, Sum).
+find_div_sum(N, Sum, N, Sum).
+find_div_sum(N, CurSum, K, Sum) :-
+    ((N mod K =:= 0) -> NextSum is CurSum + K; NextSum is CurSum),
+    NextK is K + 1,
+    find_div_sum(N, NextSum, NextK, Sum).
+
 % предикат read_list(-List)
 % считывает список с клавиатуры.
 read_list(List) :- read_list([], List).
