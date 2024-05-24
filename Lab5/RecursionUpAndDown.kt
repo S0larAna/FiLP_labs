@@ -35,6 +35,9 @@ class RecursionUpAndDown {
     fun transformNumber(n: Int, funct: (Int, Int)->Int, result:Int=0): Int  =
             if (n==0) result else transformNumber(n/10, funct, funct(n%10, result))
 
+    fun transformNumberWrapper(n:Int, funct: (Int) -> Int, result: Int=0): Int = funct(n)
+
+
     fun numDivsPrimePos(list: List<Int>): List<Int>{
         return process(list, {num -> if (countDivs(num)==0 && num>=0) true else false}, ::countDivs)
     }
@@ -62,6 +65,16 @@ class RecursionUpAndDown {
         return sum
     }
 
+    fun countDivsCyclic(n:Int): Int{
+        var count = 2
+        var div = 2
+        while (div<n){
+            if (n%div==0) count++
+            div++
+        }
+        return count
+    }
+
     // задание 3
     fun maxDigitDown(n:Int, max:Int = 0):Int = if (n==0) max else if (n%10>max) maxDigitDown(n/10, n%10) else maxDigitDown(n/10, max)
 
@@ -77,15 +90,12 @@ class RecursionUpAndDown {
         else return sumDigitMod3Up(n/10)
     }
 
-    fun countDivsCyclic(n:Int): Int{
-        var count = 2
-        var div = 2
-        while (div<n){
-            if (n%div==0) count++
-            div++
-        }
-        return count
-    }
+    tailrec fun sumDigitMod3Down(n:Int, sum:Int=0): Int = if (n==0) sum
+    else if (n%10%3==0) sumDigitMod3Down(n/10, sum+n%10) else sumDigitMod3Down(n/10, sum)
+
+    fun countDivsUp(n: Int, div:Int=1):Int = if (n<div) 0 else
+        if (n%div==0) countDivsUp(n, div+1) +1
+        else countDivsUp(n, div+1)
 
 
     fun main() {
@@ -107,7 +117,12 @@ class RecursionUpAndDown {
         println(sumDigitMod3Cyclic(123))
         println(countDivsCyclic(60))
         println("Task 3")
-        println()
+        println(sumDigitMod3Down(123))
+        println(countDivsUp(123))
+        var result3 = transformNumber(1234, {a, b -> if (a%3==0) (a+b) else b})
+        println(result3)
+        result3 = transformNumberWrapper(1234, ::countDivs)
+        println(result3)
     }
 }
 
