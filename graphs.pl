@@ -116,6 +116,26 @@ short_way(V,E,I,S,Way,_,Len):-
 	make_way(V,E,I,S,Cur_Way1),list_len(Cur_Way1,L),L<Len,!,short_way(V,E,I,S,Way,Cur_Way1,L).
 short_way(_,_,_,_,Way,Way,_).
 
+% Предикат для чтения графа из файла
+read_graph(File) :-
+    open(File, read, Stream),
+    read_edges(Stream),
+    close(Stream).
+
+% Вспомогательный предикат для чтения всех ребер из потока
+read_edges(Stream) :-
+    read(Stream, Term),
+    ( Term == end_of_file ->
+        true
+    ; assertz(Term),
+      read_edges(Stream)
+    ).
+
+% Пример использования
+?- read_graph('graph.txt').
+% После выполнения этого предиката, все ребра из файла будут добавлены в базу данных Пролога.
+
+
 
 
 
